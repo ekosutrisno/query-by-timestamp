@@ -35,6 +35,18 @@ public class Promotion {
     @Column(nullable = false)
     private OffsetDateTime lastUpdatedDate;
 
+    public Promotion() {
+    }
+
+    public Promotion(Integer promotionId, String promotionDesc, Date validFrom, Date validTo, OffsetDateTime createdDate, OffsetDateTime lastUpdatedDate) {
+        this.promotionId = promotionId;
+        this.promotionDesc = promotionDesc;
+        this.validFrom = validFrom;
+        this.validTo = validTo;
+        this.createdDate = createdDate;
+        this.lastUpdatedDate = lastUpdatedDate;
+    }
+
     @PrePersist
     public void prePersist() {
         createdDate = OffsetDateTime.now();

@@ -25,6 +25,16 @@ public class Book {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date createdFrom;
 
+    public Book(Integer bookId, String bookName, Date createdFrom) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.createdFrom = createdFrom;
+    }
+
+    public Book() {
+
+    }
+
     public void setBookName(String bookName) {
         this.bookName = bookName;
     }
