@@ -3,6 +3,8 @@ package com.ekosutrisno.searching.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -13,11 +15,13 @@ import java.util.Date;
 @Table(name = "book")
 public class Book {
     @Id
-    @Column(nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     private Integer bookId;
 
-    @Column
+    @Column(nullable = false, length = 100)
+    @NotNull
+    @Size(min = 3, max = 100)
     private String bookName;
 
     @Column

@@ -1,6 +1,7 @@
 package com.ekosutrisno.searching.controller;
 
 import com.ekosutrisno.searching.entity.Promotion;
+import com.ekosutrisno.searching.exceptions.ValidationConfigurationException;
 import com.ekosutrisno.searching.repository.PromotionRepository;
 import com.ekosutrisno.searching.utils.ParseDateUtil;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,9 +21,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class PromotionController {
 
     private final PromotionRepository promotionRepository;
+    private final ValidationConfigurationException validator;
 
-    public PromotionController(PromotionRepository promotionRepository) {
+    public PromotionController(PromotionRepository promotionRepository, ValidationConfigurationException validator) {
         this.promotionRepository = promotionRepository;
+        this.validator = validator;
     }
 
     @GetMapping
@@ -44,6 +47,7 @@ public class PromotionController {
     public Promotion insertPromotion(@RequestBody Promotion promotion) {
         promotion.setValidFrom(new Date());
         promotion.setValidTo(new Date());
+        validator.validate(promotion);
         return promotionRepository.save(promotion);
     }
 }

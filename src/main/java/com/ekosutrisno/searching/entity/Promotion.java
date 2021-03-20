@@ -1,6 +1,8 @@
 package com.ekosutrisno.searching.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
@@ -18,7 +20,9 @@ public class Promotion {
     @Column(nullable = false, updatable = false)
     private Integer promotionId;
 
-    @Column
+    @Column(nullable = false)
+    @Size(min = 10, max = 150)
+    @NotEmpty
     private String promotionDesc;
 
     @Temporal(TemporalType.TIMESTAMP)
